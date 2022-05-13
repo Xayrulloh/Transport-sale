@@ -1,0 +1,30 @@
+type Mutation {
+    addTransport(
+        branchId: Int!
+        model: String!
+        color: String!
+        img: String!
+    ): MutationResponse!
+    
+    changeTransport(
+        transportId: Int!
+        branchId: Int!
+        model: String!
+        color: String!
+        img: String!
+    ): MutationResponse!
+    
+    deleteTransport(
+        transportId: Int!
+    ): MutationResponse!
+}
+
+
+type Transport {
+    transportId: Int!
+    branchId: Int!
+    model: String!
+    color: String!
+    img: String!
+    transportAddedAt: String!
+}

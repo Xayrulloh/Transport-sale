@@ -1,0 +1,29 @@
+# ## pagination input
+input Pagination {
+    page: Int
+    limit: Int
+}
+
+scalar Upload
+
+input Sort {
+    byDate: SortOptions
+    byName: SortOptions
+}
+
+# ## enum types
+enum SortOptions {
+    toLargest
+    toSmallest
+}
+
+## object types
+type MutationResponse {
+    status: Int!
+    message: String!
+    token: String
+    data: GlobalType!
+}
+
+## union types
+union GlobalType = Staff | Branch | Permission | Transport

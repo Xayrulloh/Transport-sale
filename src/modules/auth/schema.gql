@@ -1,0 +1,25 @@
+type Mutation {
+    addStaff(
+        staffname: String!
+        password: String!
+        repeat_password: String!
+        branchId: Int!
+        birthdate: String!
+        gender: String!
+    ): MutationResponse!
+
+    login(
+        staffname: String!
+        password: String!
+        repeat_password: String!
+    ): MutationResponse!
+}
+
+type Staff {
+    staffId: ID!
+    staffname: String!
+    password: String!
+    branchId: Int!
+    birthdate: String!
+    gender: String!
+}

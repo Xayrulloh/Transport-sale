@@ -1,0 +1,13 @@
+type Mutation {
+    addPermission(
+        staffId: Int!
+        permissionModule: String!
+        value: String!
+    ): MutationResponse!
+
+    deletePermission(
+        staffId: Int!
+        permissionModule: String!
+        value: String!
+    ): MutationResponse!
+}

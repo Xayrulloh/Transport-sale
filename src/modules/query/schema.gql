@@ -1,0 +1,24 @@
+type Query {
+    transports(
+        pagination: Pagination
+        search: String
+        sort: Sort
+    ): [Transport!]!
+    transport(transportid: Int!): Transport
+
+    staffs(
+        pagination: Pagination
+        search: String
+        sort: Sort
+    ): [Staff!]!
+    staff(transportid: Int!): Staff
+
+    branches(
+        pagination: Pagination
+        search: String
+        sort: Sort
+    ): [Branch!]!
+
+    permissions:[Permission]!
+    permission: Permission!
+}
