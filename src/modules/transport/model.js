@@ -6,13 +6,13 @@ async function addTransport({ branchId, model, color, img }) {
     return transport
 }
 
-async function changeTransport({ transportid, branchId, model, color, img }) {
-    const [transport] = await db(query.CHANGE_TRANSPORT, transportid, branchId, model, color, img)
+async function changeTransport({ transportId, model, color }) {
+    const [transport] = await db(query.CHANGE_TRANSPORT, transportId, model, color)
     return transport
 }
 
-async function deleteTransport({ transportid }) {
-    const [transport] = await db(query.DELETE_TRANSPORT, transportid)
+async function deleteTransport({ transportId }) {
+    const [transport] = await db(query.DELETE_TRANSPORT, transportId)
     return transport
 }
 

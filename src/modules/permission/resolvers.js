@@ -16,7 +16,7 @@ export default {
                 if (['add_branch', 'toall', 'read_transport', 'read_branch', 'read_permission', 'read_stuff'].includes(args.permissionModule)) {
                     if (args.value != 'true') {throw new NotFoundError('Invalid input')}
                     
-                    args.value = args.value == 'true' ? true : ''
+                    args.value = true
                     
                     const permission = await model.addPermission(args)
                     return {
@@ -61,7 +61,7 @@ export default {
                 if (['add_branch', 'toall', 'read_transport', 'read_branch', 'read_permission', 'read_stuff'].includes(args.permissionModule)) {
                     if (args.value != 'false') {throw new NotFoundError('Invalid input')}
                     
-                    args.value = args.value == 'false' ? false : ''
+                    args.value = false
                     
                     const permission = await model.addPermission(args)
                     return {

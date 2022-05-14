@@ -9,7 +9,7 @@ create database transportSales;
 
 -- type
 CREATE TYPE gen AS ENUM ('female', 'male');
-CREATE TYPE col AS ENUM ('red', 'green', 'black', 'white', 'blue', 'brown', 'orange', 'yellow');
+CREATE TYPE col AS ENUM ('red', 'green', 'black', 'white', 'blue', 'brown', 'orange', 'yellow', 'gray');
 CREATE TYPE adr AS ENUM ('Tashkent', 'Andijon', 'Buxoro', 'Farg''ona', 'Jizzax', 'QoraQalpoqiston', 'Qashqadaryo', 'Xorazm', 'Namangan', 'Navoiy', 'Samarqand', 'Surxandaryo', 'Sirdaryo');
 
 -- table

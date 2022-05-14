@@ -10,15 +10,14 @@ const ADD_TRANSPORT = `
 
 const CHANGE_TRANSPORT = `
     update transports set 
-        branchId = $2,
-        model = $3,
-        color = $4,
+        model = $2,
+        color = $3
     where transportid = $1
     returning *
 `
 
 const DELETE_TRANSPORT = `
-    delete from transport where transportId = $1 returning *
+    delete from transports where transportId = $1 returning *
 `
 
 

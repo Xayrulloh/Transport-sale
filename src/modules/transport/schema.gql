@@ -8,7 +8,6 @@ type Mutation {
     
     changeTransport(
         transportId: Int!
-        branchId: Int!
         model: String!
         color: String!
     ): MutationResponse!
