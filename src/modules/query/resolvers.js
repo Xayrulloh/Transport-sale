@@ -37,15 +37,19 @@ export default {
                 if (result?.message || !result) {throw new NotFoundError('You can\'t see staffs')}
 
                 if (result.toall) {
-                    return await model.getStaffs({
+                    let answer = await model.getStaffs({
                         page: pagination?.page || PAGINATION_CONFIG.PAGINATION.PAGE,
                         limit: pagination?.limit || PAGINATION_CONFIG.PAGINATION.LIMIT,
                         sortValue: sort ? sort[sortKey] : null,
                         sortKey,
                         search,
                     })
+
+                    return answer
                 } else if (result.read_stuff) {
-                    return await model.getStaff(result)
+                    let answer = await model.getStaff(result)
+                    for (let el of answer) el.birthdate = el.birthdate.toLocaleString()
+                    return answer
                 } 
                 throw new NotFoundError('You can\'t see staffs')
 
@@ -54,20 +58,25 @@ export default {
             }
         },
 
-        branches: async (_, __, global) => {
+        branches: async (_, { pagination, search, sort }, global) => {
             try {
                 let result = await checkStaff(global)
                 const sortKey = Object.keys(sort || {})[0]
                 
                 if (result?.message || !result || (!result.toall && !result.read_branch)) {throw new NotFoundError('You can\'t see branches')}
 
-                return await model.getBranches({
+                let answer = await model.getBranches({
                     page: pagination?.page || PAGINATION_CONFIG.PAGINATION.PAGE,
                     limit: pagination?.limit || PAGINATION_CONFIG.PAGINATION.LIMIT,
                     sortValue: sort ? sort[sortKey] : null,
                     sortKey,
                     search,
                 })
+
+                for (let el of answer) el.branchaddedat = el.branchaddedat.toLocaleString()
+                
+                return answer;
+
             } catch (error) {
                 throw error
             }
@@ -76,8 +85,8 @@ export default {
         permissions: async (_, __, global) => {
             try {
                 let result = await checkStaff(global)
-                if (result?.message || !result || (!result.toall && !result.read_permission)) {throw new NotFoundError('You can\'t see branches')}
-
+                if (result?.message || !result || (!result.toall && !result.read_permission)) {throw new NotFoundError('You can\'t see permissions')}
+                
                 return await model.getPermissions()
 
             } catch (error) {
@@ -88,7 +97,7 @@ export default {
         permission: async (_, __, global) => {
             try {
                 let result = await checkStaff(global)
-                if (result?.message || !result || (!result.toall && !result.read_permission)) {throw new NotFoundError('You can\'t see branches')}
+                if (result?.message || !result || (!result.toall && !result.read_permission)) {throw new NotFoundError('You can\'t see permission')}
 
                 return result
 

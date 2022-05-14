@@ -4,7 +4,7 @@ import model from './model.js'
 
 export default {
     Mutation: {
-        addStaff: async (_, args, global) => {
+        register: async (_, args, global) => {
             if (!args.staffname.trim() || !args.password.trim() || args.staffname.length <= 2 || args.password.length <= 3 || args.password != args.repeat_password) {
                 throw new UserInputError("The staffname and password are required!")
             }
@@ -30,7 +30,7 @@ export default {
 
             const staff = await model.login(args)
 
-            if (!staff) throw new UserInputError('You are not our staff first register')
+            if (!staff) throw new UserInputError('You are not our staff. First register')
 
             let token = JWT.sign({token: staff.staffid, userAgent:global.userAgent}, process.env.JWT_SECRET_KEY, {expiresIn: '5h'});
 

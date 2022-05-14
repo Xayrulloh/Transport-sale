@@ -10,7 +10,7 @@ export class NotFoundError extends ApolloError {
 
 export class DatabaseError extends ApolloError {
     constructor(message) {
-        super(message, 'Database Error')
+        super(message, 'What are you entering?')
 
         Object.defineProperty(this, 'name', { value: 'databaseError' })
     }

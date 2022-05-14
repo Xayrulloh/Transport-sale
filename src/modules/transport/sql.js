@@ -1,5 +1,5 @@
 const ADD_TRANSPORT = `
-    insert into transpoorts(
+    insert into transports(
         branchId,
         model,
         color,
@@ -13,7 +13,6 @@ const CHANGE_TRANSPORT = `
         branchId = $2,
         model = $3,
         color = $4,
-        img = $5
     where transportid = $1
     returning *
 `

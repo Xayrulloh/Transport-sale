@@ -11,3 +11,19 @@ type Mutation {
         value: String!
     ): MutationResponse!
 }
+
+type Permission {
+    permissionid: ID
+    staffid: ID
+    add_transport: String
+    change_transport: String
+    delete_transport: String
+    add_branch: Boolean
+    change_branch: String
+    delete_branch: String
+    toall: Boolean
+    read_transport: Boolean
+    read_branch: Boolean
+    read_permision: Boolean
+    read_stuff: Boolean
+}

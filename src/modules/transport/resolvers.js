@@ -7,6 +7,7 @@ import fs from 'fs'
 import path from 'path'
 import JWT from 'jsonwebtoken'
 import model from './model.js'
+import branchModel from '../branch/model.js'
 import { finished } from 'stream/promises'
 
 export default {
@@ -14,8 +15,9 @@ export default {
         addTransport: async (_, args, global) => {
             try {
                 let result = await checkStaff(global)
-                let { createReadStream, filename, mimetype, encoding } = result.img
-                
+
+                let { createReadStream, filename, mimetype, encoding } = await args.img
+
                 if (!['image/png', 'image/jpg', 'image/jpeg'].includes(mimetype)) {throw new UserInputError("You must upload image")}
 
                 const stream = createReadStream()
@@ -23,25 +25,32 @@ export default {
                 const out = fs.createWriteStream(path.join(process.cwd(), 'uploads', fileName));
                 stream.pipe(out);
                 await finished(out);
-                // if (result?.message || !result) throw new NotFoundError('You can\'t add branch')
-                // if (!args.branchname.trim() || !args.address.trim() || args.branchname.length <= 2) {
-                //     throw new UserInputError("The branch name and addres are required! And address name should contain in region of uzbekistan")
-                // }
+
+                if (result?.message || !result) throw new NotFoundError('You can\'t add transport')
                 
-                // if (!result.toall && !result.add_transport) throw new NotFoundError('You can\'t add branch')
-                // const branch = await model.addBranch(args)
+                if (args.model.length <= 2) {throw new UserInputError("The model required")}
                 
-                // return {
-                //     status: 200,
-                //     message: "The branch added!",
-                //     data: branch
-                // }
+                if (!result.toall && !result.add_transport.includes(args.branchId)) throw new NotFoundError('You can\'t add transort')
+                
+                let resolve = await branchModel.branches()
+                if (!resolve.find(el => el.branchid == args.branchId)) throw new NotFoundError('You can\'t add transport')
+
+                const transport = await model.addTransport({ branchId:args.branchId, model:args.model, color:args.color, img:fileName })
+
+                return {
+                    status: 200,
+                    message: "The transport added!",
+                    data: transport
+                }
                 
             } catch (error) {
                 throw error;
             }
         },
         
+        changeTransport: async (_, args, global) => {
+            
+        }
         // changeBranch: async (_, args, global) => {
         //     try {
         //         let result = await checkStaff(global)
@@ -101,6 +110,6 @@ export default {
         model: global => global.model,
         color: global => global.color,
         img: global => global.img,
-        transportAddedAt: global => global.transportAddedAt,
+        transportAddedAt: global => global.transportaddedat,
     }
 }

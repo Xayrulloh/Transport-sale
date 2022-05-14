@@ -48,12 +48,8 @@ create table permissions (
 create table transports (
   transportId serial primary key,
   branchId int not null  references branches(branchId) ON DELETE CASCADE,
-  model varchar(30) not null,
+  model varchar(30) unique not null,
   color col,
-  img varchar(30) not null,
+  img text not null,
   transportAddedAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
-
-
-
-

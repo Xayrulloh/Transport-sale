@@ -1,5 +1,5 @@
 type Mutation {
-    addStaff(
+    register(
         staffname: String!
         password: String!
         repeat_password: String!
@@ -16,10 +16,10 @@ type Mutation {
 }
 
 type Staff {
-    staffId: ID!
-    staffname: String!
-    password: String!
-    branchId: Int!
-    birthdate: String!
-    gender: String!
+    staffId: ID
+    staffname: String
+    password: String
+    branchId: Int
+    birthdate: String
+    gender: String
 }

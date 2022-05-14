@@ -24,7 +24,7 @@ import schema from './modules/index.js'
             const token = req.get('token')
             return {userAgent, token}
         },
-        csrfPrevention: true,
+        csrfPrevention: false,
         introspection: true,
         plugins: [
             ApolloServerPluginDrainHttpServer({ httpServer }),
